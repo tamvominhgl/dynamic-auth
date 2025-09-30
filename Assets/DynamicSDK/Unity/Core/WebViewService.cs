@@ -24,7 +24,6 @@ namespace DynamicSDK.Unity.Core
         public System.Action<string> OnUrlChanged;
         public System.Action OnOAuthCancelled;
 
-        private Rect _webViewRect = new();
         private void Awake()
         {
             config = DynamicSDKConfig.Instance;
@@ -335,13 +334,14 @@ namespace DynamicSDK.Unity.Core
 
         public void ShrinkWebView()
         {
-            _webViewRect = webView.Frame;
-            webView.Frame = Rect.zero;
+            var hiddenRect = webViewRect;
+            hiddenRect.y = Screen.height;
+            webView.Frame = hiddenRect;
         }
         
         public void ExpandWebView()
         {
-            webView.Frame = _webViewRect;
+            webView.Frame = webViewRect;
         }
 
         /// <summary>
