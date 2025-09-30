@@ -334,9 +334,7 @@ namespace DynamicSDK.Unity.Core
 
         public void ShrinkWebView()
         {
-            var hiddenRect = webViewRect;
-            hiddenRect.y = Screen.height;
-            webView.Frame = hiddenRect;
+            webView.Frame = Rect.zero;
         }
         
         public void ExpandWebView()
