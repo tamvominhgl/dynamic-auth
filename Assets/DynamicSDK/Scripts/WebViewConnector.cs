@@ -615,13 +615,19 @@ public class WebViewConnector : MonoBehaviour
             OnError?.Invoke($"Sign failed: {message.data.error}");
         }
 
+        // On android, when disable ShowWebViewWhenSigningMessage, OnWebViewClosed is not triggered.
+        // Maybe because the webview rect is set to zero. Unset isProcessingRequest to not block later request.
+        if (!DynamicSDKManager.Instance.Config.ShowWebViewWhenSigningMessage &&
+            isProcessingRequest)
+        {
+            isProcessingRequest = false;
+        }
+
         webViewService?.HideWithAnimation(() =>
         {
             if(!DynamicSDKManager.Instance.Config.ShowWebViewWhenSigningMessage)
                 webViewService?.ExpandWebView();
         });
-
-       
     }
 
     private void HandleTransactionResponse(TransactionResponseMessage message)
