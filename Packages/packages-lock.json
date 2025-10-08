@@ -184,6 +184,15 @@
       "dependencies": {},
       "url": "https://package.openupm.com"
     },
+    "xyz.dynamic.unitysdk": {
+      "version": "1.0.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "url": "https://packages.dynamic.xyz"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
