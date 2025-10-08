@@ -97,6 +97,7 @@ public class AuthScene : MonoBehaviour
         if (!string.IsNullOrEmpty(message))
         {
             Signature.text = default;
+            m_sdk.WebView.ShrinkWebView();
             m_sdk.SignMessage(message, isSuiTransaction: true);
         }
     }
@@ -220,6 +221,14 @@ public class AuthScene : MonoBehaviour
     {
         Signature.text = signature;
         GUIUtility.systemCopyBuffer = signature;
+
+        _ = ExpandWebView(0.5f);
+    }
+
+    async Awaitable ExpandWebView(float delay)
+    {
+        await Awaitable.WaitForSecondsAsync(delay);
+        m_sdk.WebView.ExpandWebView();
     }
 
     async Awaitable GetJWT(float delay)
