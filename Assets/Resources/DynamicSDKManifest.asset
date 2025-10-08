@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a1c6b94cb484343a77eaac47a14924, type: 3}
   m_Name: DynamicSDKManifest
   m_EditorClassIdentifier: 
-  platform: 
-  clientVersion: 
-  environmentId: 9057138c-bcd1-4115-9b08-9bf033baeedf
-  appOrigin: 
+  platform: browser
+  clientVersion: 1
+  environmentId: c1564a11-63ec-4236-8414-ec7972cc767f
+  appOrigin: appOrigin.com
   apiBaseUrl: 
   appLogoUrl: 
   appName: 

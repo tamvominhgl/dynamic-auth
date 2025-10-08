@@ -19,7 +19,7 @@ MonoBehaviour:
   handleEditorSafeAreaAutomatically: 1
   editorSafeAreaBottomPadding: 0.05
   useWebViewForOAuthInEditor: 1
-  transitionDuration: 0.35
+  transitionDuration: 0.25
   enableClickOutsideToClose: 1
   enableWebViewPreload: 1
   enableDebugLogs: 1
