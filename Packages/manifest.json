@@ -9,6 +9,7 @@
     "com.unity.render-pipelines.universal": "17.0.4",
     "com.unity.ugui": "2.0.0",
     "com.yasirkula.ingamedebugconsole": "1.8.2",
+    "xyz.dynamic.unitysdk": "1.0.3",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -48,6 +49,13 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.yasirkula"
+      ]
+    },
+    {
+      "name": "Dynamic XYZ",
+      "url": "https://packages.dynamic.xyz",
+      "scopes": [
+        "xyz.dynamic.unitysdk"
       ]
     }
   ]
