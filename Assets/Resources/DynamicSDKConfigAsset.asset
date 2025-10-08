@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2821d942a0d849098af4a449a23e9a2, type: 3}
+  m_Name: DynamicSDKConfigAsset
+  m_EditorClassIdentifier: 
+  serverUrl: https://dynamic-unity-webview.vercel.app
+  mobileServerUrl: https://dynamic-unity-webview.vercel.app
+  heightRatio: 0.6
+  bottomOffset: 0
+  handleEditorSafeAreaAutomatically: 1
+  editorSafeAreaBottomPadding: 0.05
+  useWebViewForOAuthInEditor: 1
+  transitionDuration: 0.35
+  enableClickOutsideToClose: 1
+  enableWebViewPreload: 1
+  enableDebugLogs: 1
+  logRawMessages: 0
