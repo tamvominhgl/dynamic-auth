@@ -19,6 +19,9 @@ public class AuthScene : MonoBehaviour
     [SerializeField] TMP_Text Signature;
     [SerializeField] Button SignButton;
 
+    [SerializeField] Button ShrinkWebViewOption;
+    [SerializeField] TMP_Text ShrinkWebViewOptionCheck;
+
     [Header("Bottom")]
     [SerializeField] Button LogInButton;
     [SerializeField] Button LogOutButton;
@@ -29,6 +32,8 @@ public class AuthScene : MonoBehaviour
     int m_authResult = default;
 
     bool m_waitingWebviewReady = false;
+
+    bool m_shrinkWebViewWhenSigning = true;
 
     void Awake()
     {
@@ -46,6 +51,15 @@ public class AuthScene : MonoBehaviour
 
         LogInButton.onClick.AddListener(ShowDynamicAuth);
         LogOutButton.onClick.AddListener(Disconnect);
+
+        ShrinkWebViewOption.onClick.AddListener(() =>
+        {
+            m_shrinkWebViewWhenSigning = !m_shrinkWebViewWhenSigning;
+            ShrinkWebViewOptionCheck.text = m_shrinkWebViewWhenSigning ? "X" : default;
+        });
+
+        m_shrinkWebViewWhenSigning = true;
+        ShrinkWebViewOptionCheck.text = m_shrinkWebViewWhenSigning ? "X" : default;
     }
 
     void OnDestroy()
@@ -97,7 +111,10 @@ public class AuthScene : MonoBehaviour
         if (!string.IsNullOrEmpty(message))
         {
             Signature.text = default;
-            m_sdk.WebView.ShrinkWebView();
+            if (m_shrinkWebViewWhenSigning)
+            {
+                m_sdk.WebView.ShrinkWebView();
+            }
             m_sdk.SignMessage(message, isSuiTransaction: true);
         }
     }
@@ -222,7 +239,10 @@ public class AuthScene : MonoBehaviour
         Signature.text = signature;
         GUIUtility.systemCopyBuffer = signature;
 
-        _ = ExpandWebView(0.5f);
+        if (m_shrinkWebViewWhenSigning)
+        {
+            _ = ExpandWebView(0.5f);
+        }
     }
 
     async Awaitable ExpandWebView(float delay)
