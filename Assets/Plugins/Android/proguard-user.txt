@@ -1,0 +1,1 @@
+-keep class xyz.dynamic.securestorage.SecureStorage { public *; }
