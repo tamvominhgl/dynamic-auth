@@ -4,7 +4,8 @@ apply from: '../shared/keepUnitySymbols.gradle'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation("androidx.security:security-crypto:1.1.0")
+    implementation 'androidx.datastore:datastore-preferences:1.1.7'
+    implementation 'com.google.crypto.tink:tink-android:1.18.0'
 **DEPS**}
 
 android {
@@ -45,14 +46,3 @@ android {
 **IL_CPP_BUILD_SETUP**
 **SOURCE_BUILD_SETUP**
 **EXTERNAL_SOURCES**
-
-configurations.all {
-    resolutionStrategy {
-        // Adjust the version number '1.8.22' if your project uses a newer Kotlin version.
-        force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
-        
-        // Exclude the older modules that contain the duplicate classes (jdk7 and jdk8 specific ones)
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
-    }
-}
