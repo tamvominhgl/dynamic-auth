@@ -16,6 +16,7 @@ MonoBehaviour:
   writeExternalStorage: 0
   accessFineLocation: 0
   addsKotlin: 1
+  customDeepLinkUrl: dltest
   kotlinVersion: 
   addsAndroidBrowser: 1
   androidBrowserVersion: 

@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a1c6b94cb484343a77eaac47a14924, type: 3}
   m_Name: DynamicSDKManifest
   m_EditorClassIdentifier: 
-  platform: browser
-  clientVersion: 1
+  platform: 
+  clientVersion: 
   environmentId: c1564a11-63ec-4236-8414-ec7972cc767f
-  appOrigin: appOrigin.com
+  appOrigin: 
   apiBaseUrl: 
   appLogoUrl: 
   appName: 
-  cssOverrides: 
+  globalWallets: 
   disableAppleLoginOnAndroid: 1
+  redirectUrl: dltest://
+  walletsToExclude: []
+  walletsToInclude:
+  - none
+  walletChainToInclude: 13
+  cssOverrides: 

@@ -16,6 +16,7 @@ MonoBehaviour:
   mobileServerUrl: https://dynamic-unity-webview.vercel.app
   heightRatio: 0.6
   bottomOffset: 0
+  bottomOffsetIPad: 0.2
   handleEditorSafeAreaAutomatically: 1
   editorSafeAreaBottomPadding: 0.05
   useWebViewForOAuthInEditor: 1
@@ -23,4 +24,5 @@ MonoBehaviour:
   enableClickOutsideToClose: 1
   enableWebViewPreload: 1
   enableDebugLogs: 1
+  forwardConsoleLogsToUnityConsole: 0
   logRawMessages: 0
