@@ -84,7 +84,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
+      "version": "3.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -186,7 +186,7 @@
       "url": "https://package.openupm.com"
     },
     "xyz.dynamic.unitysdk": {
-      "version": "1.0.10",
+      "version": "1.0.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
