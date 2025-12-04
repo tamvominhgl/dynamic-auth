@@ -28,18 +28,16 @@ public class AuthScene : MonoBehaviour
 
     DynamicSDKManager m_sdk;
     DynamicSDKManifest m_manifest;
-    bool m_isAuthenticating;
-    int m_authResult = default;
+
+    float m_delayToGetJwt = -1f;
 
     bool m_waitingWebviewReady = false;
-
     bool m_shrinkWebViewWhenSigning = true;
 
     void Awake()
     {
         DynamicSDKManager.OnWalletConnected += OnWalletConnected;
         DynamicSDKManager.OnWalletDisconnected += OnWalletDisconnected;
-        DynamicSDKManager.OnUserAuthenticated += OnUserAuthenticated;
         DynamicSDKManager.OnJwtTokenReceived += OnJwtTokenReceived;
         DynamicSDKManager.OnSDKError += OnSDKError;
         DynamicSDKManager.OnWebViewReady += OnWebViewReady;
@@ -66,7 +64,6 @@ public class AuthScene : MonoBehaviour
     {
         DynamicSDKManager.OnWalletConnected -= OnWalletConnected;
         DynamicSDKManager.OnWalletDisconnected -= OnWalletDisconnected;
-        DynamicSDKManager.OnUserAuthenticated -= OnUserAuthenticated;
         DynamicSDKManager.OnJwtTokenReceived -= OnJwtTokenReceived;
         DynamicSDKManager.OnSDKError -= OnSDKError;
         DynamicSDKManager.OnWebViewReady -= OnWebViewReady;
@@ -85,8 +82,6 @@ public class AuthScene : MonoBehaviour
 
         m_sdk = DynamicSDKManager.Instance;
         ShowDynamicAuth();
-
-        _ = LoadConfig();
     }
 
     /////////////////////////////////////////////////
@@ -140,14 +135,11 @@ public class AuthScene : MonoBehaviour
 
         if (!m_sdk.IsWalletConnected)
         {
-            m_isAuthenticating = true;
-            m_authResult = default;
-
             m_sdk.ConnectWallet();
         }
         else
         {
-            _ = GetJWT(delay: 0);
+            GetJWT(delay: 0);
         }
     }
 
@@ -158,7 +150,6 @@ public class AuthScene : MonoBehaviour
             return;
         }
 
-        m_authResult = default;
         m_sdk.DisconnectWallet();
     }
 
@@ -167,7 +158,10 @@ public class AuthScene : MonoBehaviour
     private void OnWalletConnected(string walletAddress)
     {
         Debug.Log($"[DynamicTest] Wallet connected: {walletAddress}");
-        m_authResult = 1;
+        if (m_sdk.IsWalletConnected && string.IsNullOrEmpty(JwtResult.text))
+        {
+            GetJWT(delay: 0.5f);
+        }
     }
 
     private void OnWalletDisconnected()
@@ -175,12 +169,6 @@ public class AuthScene : MonoBehaviour
         Debug.Log($"[DynamicTest] Wallet disconnected");
 
         JwtResult.text = default;
-    }
-
-    private void OnUserAuthenticated(UserInfo userInfo)
-    {
-        Debug.Log($"[DynamicTest] User authenticated: {userInfo.email}");
-        m_authResult = 2;
     }
 
     private void OnJwtTokenReceived(JwtTokenResponseMessage jwtToken)
@@ -207,14 +195,11 @@ public class AuthScene : MonoBehaviour
 
             if (!m_sdk.IsWalletConnected)
             {
-                m_isAuthenticating = true;
-                m_authResult = default;
-
                 m_sdk.ConnectWallet();
             }
             else
             {
-                _ = GetJWT(delay: 0);
+                GetJWT(delay: 0);
             }
         }
     }
@@ -223,14 +208,9 @@ public class AuthScene : MonoBehaviour
     {
         Debug.Log("[DynamicTest] WebView closed");
 
-        if (m_isAuthenticating)
+        if (m_sdk.IsWalletConnected && string.IsNullOrEmpty(JwtResult.text))
         {
-            m_isAuthenticating = false;
-        }
-
-        if (m_authResult > 0 && string.IsNullOrEmpty(JwtResult.text))
-        {
-            _ = GetJWT(delay: 0.25f);
+            GetJWT(delay: 0.25f);
         }
     }
 
@@ -251,47 +231,20 @@ public class AuthScene : MonoBehaviour
         m_sdk.WebView.ExpandWebView();
     }
 
-    async Awaitable GetJWT(float delay)
+    void GetJWT(float delay)
     {
-        var cancelToken = destroyCancellationToken;
-        if (delay > 0)
-        {
-            await Awaitable.WaitForSecondsAsync(delay);
-            if (cancelToken.IsCancellationRequested)
-            {
-                return;
-            }
-        }
-
-        DynamicSDKManager.Instance.GetJwtToken();
+        m_delayToGetJwt = delay;
     }
 
-    private async Awaitable LoadConfig()
+    void Update()
     {
-        Debug.Log($"Download Config");
-        var url = $"https://remote-config.game.claynosaurz.com/configs/claynosaurz:android:googleplay/beta";
-
-        using var request = UnityWebRequest.Get(url);
-        request.timeout = 20;
-        // request.certificateHandler = new CustomCertificateHandler();
-
-        await request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
+        if (m_delayToGetJwt >= 0)
         {
-            Debug.Log($"Config data: {request.downloadHandler.text}");
-        }
-        else if (request.result == UnityWebRequest.Result.ConnectionError)
-        {
-            Debug.LogWarning($"Config connection error: {request.error}");
-        }
-        else if (request.result == UnityWebRequest.Result.ProtocolError)
-        {
-            Debug.LogWarning($"Config protocol error: {request.error}");
-        }
-        else
-        {
-            Debug.LogWarning($"Config error: {request.error}");
+            m_delayToGetJwt -= Time.deltaTime;
+            if (m_delayToGetJwt < 0)
+            {
+                m_sdk.GetJwtToken();
+            }
         }
     }
 }
