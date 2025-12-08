@@ -186,7 +186,7 @@
       "url": "https://package.openupm.com"
     },
     "xyz.dynamic.unitysdk": {
-      "version": "1.0.12",
+      "version": "1.0.13",
       "depth": 0,
       "source": "registry",
       "dependencies": {
