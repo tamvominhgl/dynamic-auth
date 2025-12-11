@@ -139,7 +139,7 @@ public class AuthScene : MonoBehaviour
         }
         else
         {
-            GetJWT(delay: 0);
+            GetJWT(delay: 0.1f);
         }
     }
 
@@ -199,7 +199,7 @@ public class AuthScene : MonoBehaviour
             }
             else
             {
-                GetJWT(delay: 0);
+                GetJWT(delay: 0.1f);
             }
         }
     }
