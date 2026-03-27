@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.binouze.googleusermessagingplatform": "https://github.com/binouze/GoogleUserMessagingPlatform.git#1.1.8",
+    "com.google.external-dependency-manager": "1.2.187",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.11.3",
     "com.unity.ide.rider": "3.0.39",
@@ -48,6 +50,7 @@
       "name": "OpenUPM",
       "url": "https://package.openupm.com",
       "scopes": [
+        "com.google.external-dependency-manager",
         "com.yasirkula"
       ]
     },

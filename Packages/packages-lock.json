@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.binouze.googleusermessagingplatform": {
+      "version": "https://github.com/binouze/GoogleUserMessagingPlatform.git#1.1.8",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b5a1d5d99ffe4dd737385a014cbefa38d03068e1"
+    },
+    "com.google.external-dependency-manager": {
+      "version": "1.2.187",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

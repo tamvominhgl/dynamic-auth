@@ -6,8 +6,24 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.datastore:datastore-preferences:1.1.7'
     implementation 'com.google.crypto.tink:tink-android:1.18.0'
+// Android Resolver Dependencies Start
+    implementation 'androidx.preference:preference:1.2+' // Packages/com.binouze.googleusermessagingplatform/Editor/GoogleUserMessagingPlatformDependencies.xml:7
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0+' // Packages/com.binouze.googleusermessagingplatform/Editor/GoogleUserMessagingPlatformDependencies.xml:6
+// Android Resolver Dependencies End
 **DEPS**}
 
+// Android Resolver Exclusions Start
+android {
+  packaging {
+      exclude ('/lib/armeabi/*' + '*')
+      exclude ('/lib/armeabi-v7a/*' + '*')
+      exclude ('/lib/mips/*' + '*')
+      exclude ('/lib/mips64/*' + '*')
+      exclude ('/lib/x86/*' + '*')
+      exclude ('/lib/x86_64/*' + '*')
+  }
+}
+// Android Resolver Exclusions End
 android {
     namespace "com.unity3d.player"
     ndkPath "**NDKPATH**"

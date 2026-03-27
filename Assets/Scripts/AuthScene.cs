@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using com.binouze;
 using DynamicSDK.Unity.Core;
 using DynamicSDK.Unity.Messages;
 using DynamicSDK.Unity.Messages.Auth;
@@ -73,6 +74,27 @@ public class AuthScene : MonoBehaviour
 
     void Start()
     {
+        var DEBUG = true;
+        if (DEBUG)
+        {
+            // this one is false by default
+            GoogleUserMessagingPlatform.SetDebugLogging(true);
+            
+            // Set here your device ID for testing, 
+            // if not set, the device ID to put here will be shown in the console
+            #if UNITY_IOS
+            // GoogleUserMessagingPlatform.SetDebugMode("XXXXXXXXX", true);
+            #elif UNITY_ANDROID
+            GoogleUserMessagingPlatform.SetDebugMode("0BCD0E622D9572E75BC97B6B32223A5B", true, DebugGeography.DEBUG_GEOGRAPHY_EEA);
+            #endif
+        }
+
+        // Initialize GoogleUserMessagingPlatform
+        GoogleUserMessagingPlatform.Initialize( status => {
+            // Maybe you want to show the form directly after the initialisation if status is REQUIRED
+            GoogleUserMessagingPlatform.ShowFormIfRequired();
+        });
+
         m_manifest = Resources.Load<DynamicSDKManifest>("DynamicSDKManifest");
         if (m_manifest != null)
         {
